@@ -1,0 +1,3 @@
+test/suite.js
+node_modules/*
+dist/*

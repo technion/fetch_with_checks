@@ -2,9 +2,9 @@
   "name": "fetch_with_checks",
   "version": "1.0.0",
   "description": "A wrapper for fetch() with safety checks",
-  "main": "index.js",
+  "main": "dist/out.js",
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --target=chrome58,firefox57 --outfile=out.js",
+    "build": "esbuild src/index.ts --bundle --target=chrome58,firefox57 --outfile=dist/out.js",
     "test": "npx esbuild test/suite.ts --outfile=test/suite.js --bundle --platform=node && mocha test/suite.js"
   },
   "author": "",
