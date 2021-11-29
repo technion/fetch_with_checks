@@ -3,7 +3,7 @@ class URLError extends Error {
     super(message);
     this.name = "URLError";
   }
-};
+}
 
 class HeaderError extends Error {
   constructor(message: string) {
@@ -23,12 +23,11 @@ const fetch_with_checks = (
   resource: string,
   init: RequestInit = {}
 ): Promise<Response> => {
-  
   // URL Guards
   let checked_url: URL;
   try {
     checked_url = new URL(resource, window.location.href); // Will throw on its own on an invalid url
-  } catch(e) {
+  } catch (e) {
     throw new URLError("URL was unable to parse" + e);
   }
 
@@ -44,7 +43,7 @@ const fetch_with_checks = (
   if (init.headers) {
     try {
       new Headers(init.headers); // Will throw on its own on an invalid header
-    } catch(_) {
+    } catch (_) {
       throw new HeaderError("Invalid Header");
     }
   }
@@ -54,6 +53,14 @@ const fetch_with_checks = (
     throw new ModeError("Invalid Mode supplied");
   }
 
+  if (
+    init.mode &&
+    init.method &&
+    init.mode == "no-cors" &&
+    !["GET", "POST", "HEAD"].includes(init.method)
+  ) {
+    throw new ModeError("no-cors mode with unsafe method");
+  }
   return fetch(checked_url.href, init);
 };
 

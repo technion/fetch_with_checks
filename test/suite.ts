@@ -4,7 +4,7 @@ import fetch_with_checks from "../src/index";
 
 global.fetch = node_fetch as any;
 // Mock this common browser feature for tests
-global.window = { location: { href: "https://www.example.com"} } as any;
+global.window = { location: { href: "https://www.example.com" } } as any;
 
 describe("URL Checks", () => {
   it("Should reject unparseable URL", () => {
@@ -42,5 +42,13 @@ describe("URL Checks", () => {
     assert.throw(() => {
       fetch_with_checks("https://example.com/", { mode: "this is bad" as any });
     }, "Invalid Mode supplied");
+  });
+  it("Should reject an unsafe mode", () => {
+    assert.throw(() => {
+      fetch_with_checks("https://example.com/", {
+        mode: "no-cors",
+        method: "CONNECT",
+      });
+    }, "no-cors mode with unsafe method");
   });
 });

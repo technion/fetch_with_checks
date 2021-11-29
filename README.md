@@ -31,5 +31,5 @@ const headers = [
 ```
 
 ## ModeError
-- Provided mode is not from a valid list
-
+- Provided mode is not from a valid list, eg `fetch_with_checks("https://example.com/", { mode: "not a mode" })`
+- Mode is no-cors but method is not a cors-safe method, eg `fetch_with_checks("https://example.com/", { mode: "no-cors", method: 'CONNECT' })`
