@@ -4,7 +4,7 @@
   "description": "A wrapper for fetch() with safety checks",
   "main": "dist/out.js",
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --target=chrome58,firefox57 --outfile=dist/out.js",
+    "build": "esbuild src/index.ts --bundle --target=chrome58,firefox57 --outfile=dist/out.js --format=cjs",
     "test": "npx esbuild test/suite.ts --outfile=test/suite.js --bundle --platform=node && mocha test/suite.js"
   },
   "author": "",
